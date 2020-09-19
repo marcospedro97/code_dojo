@@ -10,6 +10,17 @@
   </head>
 
   <body>
+    <nav>
+      <% if user_signed_in? %>
+        <span>
+            <%= link_to t('shared.links.sign_out', scope: 'devise'), destroy_user_session_path, method: :delete%>
+        </span>
+      <% else %>
+        <span>
+            <%= link_to t('shared.links.sign_in', scope: 'devise'), new_user_session_path%>
+        </span>
+      <% end %>
+    </nav>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
