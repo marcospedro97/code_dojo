@@ -9,9 +9,9 @@ feature 'User authenticates' do
   sign_out_button = I18n.t('shared.links.sign_out', scope: 'devise')
 
   scenario 'successfully' do
-    #ARRANGE
+    # ARRANGE
     user = create(:user)
-    #ACT
+    # ACT
     visit root_path
     click_on sign_in
     within 'form' do
@@ -19,23 +19,23 @@ feature 'User authenticates' do
       fill_in password_field, with: user.password
       click_on login_button
     end
-    #ASSERT
+    # ASSERT
     expect(current_path).to eq(root_path)
     expect(page).to have_content(signed_message)
     expect(page).to have_content(sign_out_button)
   end
 
   scenario 'failed' do
-    #ARRANGE
+    # ARRANGE
     user = build(:user)
-    #ACT
+    # ACT
     visit new_user_session_path
     within 'form' do
       fill_in email_field, with: user.email
       fill_in password_field, with: user.password
       click_on login_button
     end
-    #ASSERT
+    # ASSERT
     expect(current_path).to eq(new_user_session_path)
     expect(page).to have_content('E-mail ou senha inválidos')
     expect(page).to have_selector('form')
